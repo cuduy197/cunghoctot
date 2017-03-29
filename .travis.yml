@@ -1,0 +1,28 @@
+language: node_js
+#android:
+ # components:
+    #- build-tools-19.1.0
+    #- android-22
+node_js:
+  - "6"
+  
+notifications:
+  email: false
+  
+install:
+  - npm install
+  - npm install -g cordova
+  
+before_script:
+  - cordova platform add browser --save
+  - cordova platform add android --save
+  - cordova plugin add cordova-plugin-inappbrowser --save
+  - cordova plugin add cordova-plugin-statusbar --save
+  - cordova plugin add cordova-plugin-tts --save
+  - cordova plugin add cordova-plugin-vibration --save
+  
+script:
+ - cordova prepare
+ 
+release:
+  - exit 0  

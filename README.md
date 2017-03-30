@@ -1,5 +1,7 @@
-# Ứng dụng trên điện thoại ôn thi THPT hiệu quả và thú vị. Sử dụng Cordova + Framewrok7 + VueJS + Vuex + Webpack2 + Firebase + Swipper :tada:
 
+# Ứng dụng trên điện thoại ôn thi THPT hiệu quả và thú vị. Sử dụng Cordova + Framewrok7 + VueJS + Vuex + Webpack2 + Firebase + Swipper :tada:
+[![dependencies Status](https://david-dm.org/cuduy197/cunghoctot/status.svg)](https://david-dm.org/cuduy197/cunghoctot)
+[![Build Status](https://travis-ci.org/cuduy197/HocTiengAnh.svg?branch=master)](https://travis-ci.org/cuduy197/HocTiengAnh)
 # Hướng dẫn :tada:
 - B1: Sau khi clone xong mở cmd nhập "npm i" xong đi uống càfe gì đó 1 lúc 
 - B2: Thêm platforms cho cordova bằng "cordova platform add browser --save" và "cordova platform add android --save" 

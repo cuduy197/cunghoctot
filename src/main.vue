@@ -1,66 +1,93 @@
 <template>
-    <!-- App -->
     <div id="app">
-        <!-- Statusbar -->
         <f7-statusbar></f7-statusbar>
-        <!-- Left Panel -->
         <left-panel> </left-panel>
-        <!-- Right Panel -->
         <right-panel></right-panel>
-        <!-- Main Views -->
-        <f7-views>
+        <!-- Hiển thị ứng dụng từ các component -->
+        <f7-views layout="">
             <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
-                <!-- Navbar -->
                 <nav-bar></nav-bar>
-                <!-- Pages -->
                 <f7-pages>
                     <f7-page>
-                        <!-- [Quote] <quote></quote>  -->
+                        <!-- [Quote] <quote></quote> -->
                         <info> </info>
-                        <!-- Navigation -->
                         <navigation></navigation>
                     </f7-page>
                 </f7-pages>
-                <!-- Bottom Bar -->
                 <bottom-bar></bottom-bar>
             </f7-view>
         </f7-views>
-        <!-- Popup Recovery Pass-->
+        <!-- Tổng hợp các modal -->
         <pop-up></pop-up>
-        <!-- Wellcome -->
         <wellcome></wellcome>
-        <!-- Login Screen -->
         <login></login>
     </div>
 </template>
 <script>
-console.log('Main init ok!');
-
-import Quote from 'assets/vue/quote/quote.vue';
-import bottomBar from 'assets/vue/bottomBar.vue';
-import leftPanel from 'assets/vue/leftPanel.vue';
-import rightPanel from 'assets/vue/rightPanel.vue';
-import navBar from 'assets/vue/navBar.vue';
-import test from 'assets/vue/test/test.vue';
-import login from 'assets/vue/login.vue';
-import popUp from 'assets/vue/popUp.vue';
-import navigation from 'assets/vue/navigation.vue';
-import info from 'assets/vue/info/info.vue';
-import wellcome from 'assets/vue/wellcomePopup.vue';
+import Quote from 'assets/vue/quote/quote';
+import bottomBar from 'assets/vue/bottomBar';
+import leftPanel from 'assets/vue/leftPanel';
+import rightPanel from 'assets/vue/rightPanel';
+import navBar from 'assets/vue/navBar';
+import test from 'assets/vue/test/test';
+import login from 'assets/vue/login';
+import popUp from 'assets/vue/popUp';
+import navigation from 'assets/vue/navigation';
+import info from 'assets/vue/info/info';
+import wellcome from 'assets/vue/wellcomePopup';
 
 export default {
-    components: {
-        Quote,
-        bottomBar,
-        leftPanel,
-        rightPanel,
-        navBar,
-        test,
-        login,
-        popUp,
-        navigation,
-        info,
-        wellcome
-    }
+
+    data() {
+            return {}
+        },
+        components: {
+            Quote,
+            bottomBar,
+            leftPanel,
+            rightPanel,
+            navBar,
+            test,
+            login,
+            popUp,
+            navigation,
+            info,
+            wellcome
+        },
+        created() {
+            var myApp = new Framework7({
+                modalTitle: 'Thông báo',
+                modalButtonOk: 'Xác nhận',
+                modalButtonCancel: 'Hủy bỏ'
+            });
+            var exit = false;
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            document.addEventListener("offline", onOffline, false);
+
+            function onDeviceReady() {
+                document.addEventListener("backbutton", onBackKeyDown, false);
+            }
+            // Handle the offline event
+            function onOffline() {
+                alert('Bạn chưa kết nối Internet! Hãy kết nối internet để lưu dữ liệu của bạn!');
+            }
+            // Handle the back button
+            function onBackKeyDown() {
+
+                exit = !exit;
+                if (exit) {
+                    myApp.confirm('Bạn muốn thoát ứng dụng?',
+                        function() {
+                            navigator.app.clearHistory();
+                            navigator.app.exitApp();
+                        },
+                        function() {
+                            myApp.closeModal();
+                        });
+                }
+
+            }
+        }
 }
 </script>

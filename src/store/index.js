@@ -8,8 +8,10 @@ import { getters } from "./getters.js";
 import mutations from "./mutations.js";
 import { actions } from "./actions.js";
 
-import { account } from "./modules/account";
 
+
+import { account } from "./modules/account";
+import { img } from "./modules/img.js";
 
 export const store = new Vuex.Store({
     state,
@@ -18,6 +20,7 @@ export const store = new Vuex.Store({
     actions,
     modules: {
         account,
+        img
     }
 });
 //Init 'CHECK' when start app

@@ -10,6 +10,10 @@ import Framework7Icons from 'framework7-icons/css/framework7-icons.css';
 // Import F7 iOS Theme Styles
 import Framework7Theme from 'framework7/dist/css/framework7.ios.min.css';
 import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min.css';
+
+
+import AnimatedCss from 'animate.css/animate.css';
+
 /* OR for Material Theme:
  import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
  import Framework7ThemeColors from 'framework7/dist/css/framework7.material.colors.min.css'
@@ -24,6 +28,9 @@ import App from './main.vue';
 import VueTouch from 'vue-touch';
 //Firebase
 import Firebase from 'firebase';
+
+
+
 //VueFire
 //import VueFire from 'vuefire';
 
@@ -45,11 +52,7 @@ new Vue({
     framework7: {
         root: '#app',
         routes: Routes,
-        //Other parameters ,...
-        swipePanel: 'left',
         animateNavBackIcon: true,
-        modalTitle: "ok",
-
     },
     // Register App Component
     components: {

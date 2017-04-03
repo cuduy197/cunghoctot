@@ -47,7 +47,7 @@ let config = function(env) {
                     options: {
                         //Add babel loader 
                         loaders: {
-                            js: 'babel-loader?presets[]=env&presets[]=stage-0'
+                            js: 'babel-loader?presets[]=env&presets[]=stage-0',
                         }
                     }
                 }

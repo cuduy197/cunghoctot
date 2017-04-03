@@ -5,7 +5,8 @@ const state = {
         emai: '',
         uid: '',
         level: 'Đang tải...',
-        login: ''
+        login: '',
+        xu: 'Đang tải...'
     },
     input: {
         email: '',

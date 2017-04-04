@@ -27,6 +27,7 @@
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.1",
     "path": "^0.12.7",
+    "pug": "^2.0.0-beta11",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.16.1",
@@ -54,5 +55,9 @@
     "vuefire": "^1.4.0",
     "vuex": "^2.2.1"
   },
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/cuduy197/cunghoctot.git"
+   },
   "author": "cuduy197"
 }

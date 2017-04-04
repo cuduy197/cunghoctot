@@ -2,7 +2,7 @@
 /*jshint -W030 */
 const state = {
     user: {
-        emai: '',
+        email: 'Đang tải...',
         uid: '',
         level: 'Đang tải...',
         login: '',
@@ -14,10 +14,6 @@ const state = {
         repassword: ''
     },
     singin: false, //Check if was singin!
-    //Input
-    islogin: false, //Check state when click Login or Logout
-    isRegister: false, //Check when click register
-    isRecoveryPass: false // Chech when click recovery pass
 };
 
 export { state };

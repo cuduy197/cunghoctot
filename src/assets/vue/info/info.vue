@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-if="singin">
+
+        <div>
             <div class="card facebook-card">
                 <div class="card-header">
                     <div class="facebook-avatar animated tada"><img :src="avatar" width="34" height="34"></div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </template>
 <script>
 import {

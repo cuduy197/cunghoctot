@@ -15,19 +15,18 @@ var mutations = {
     inputRePassword(state, value) { state.input.repassword = value; },
     //CHECK AND INIT!!! IMPORTANT!
     INIT_APP(state) {
+        var loading_text = ['Oh la la ...', "Đợi 1 chút nhé ...", "Sống như những đóa hoa ...", '1,2,3,5 bạn có đánh rơi nhịp nào không?', "Chờ tí nhé ...", 'Hãy yêu ngày tới dù quá mệt kiếp người ...', "Để gió cuốn đi...", "Cười lên nào :)", "Never give up!!!", "Tập thể dục nào ...", "Sử dụng thời gian hiệu quả nhé...", "Nhớ bảo vệ mắt ...", "Cùng thư giãn nào ...", "Hãy cứ ngu ngơ, cứ dại khờ ...", "Vui lên đi buồn làm chi :)"];
 
+        f7.showPreloader(loading_text[Math.floor(Math.random() * loading_text.length)]);
         firebase.auth().onAuthStateChanged(user => {
             var onUpdateUserUID;
             if (user) {
                 state.singin = true;
-
-
                 console.log('Chào mừng: ' + firebase.auth().currentUser.email);
                 console.info('Bae đã đăng nhập ^^!');
                 //UID and Eamil, login 
                 state.user.uid = user.uid;
                 state.user.email = user.email;
-
                 console.log("State uid của bae là : " + state.user.uid);
 
                 //CẬP NHẬT 1 LẦN
@@ -39,19 +38,13 @@ var mutations = {
                     //KHỞI TẠO CÁC THUỘC TÍNH LẦN ĐẦU
                     data.level === undefined && UserUID.update({ level: 0 });
                     data.xu === undefined && UserUID.update({ xu: 0 });
-
                 }, (error) => {
                     f7.alert('Đã có lỗi khi tải dữ liệu! Kiểm tra kết nối mạng của bạn!');
                     console.info("Error: " + error.code);
                 });
 
-
-                //Data test admin
-                // dataRef.update({ test: 'ok' });
-
                 //CẬP NHẬT LIÊN TỤC KHI GIÁ TRỊ THAY ĐỔI
                 //Set snapshot data -->  store state! 
-                //Check when value change listener!
                 onUpdateUserUID = UserUID.on("value", snapshot => {
                     //console.log('on Update!');
                     console.log(snapshot.val());
@@ -60,33 +53,31 @@ var mutations = {
                     state.user.xu = data.xu;
                     state.user.login = data.login;
 
-                    state.user.login && f7.closeModal();
+                    //Close modal
+                    state.user.login && setTimeout(() => { f7.closeModal(); }, 888);
 
                 }, (error) => {
                     f7.alert('Đã có lỗi khi tải dữ liệu! Kiểm tra kết nối mạng của bạn!');
                     console.info("Error: " + error.code);
                 });
-
             } else {
-
-
+                f7.hidePreloader();
                 console.info('Bae chưa đăng nhập, đăng nhập để đến với em đi nào bae ^^!');
                 //XÓA CẬP NHẬT DỮ LIỆU CỦA UID CŨ!
                 //Cance listener value change !
-
-                if (state.singin) {
+                if (state.user.login === true) {
                     userRef.child(state.user.uid).update({ login: false });
+                    userRef.child(state.user.uid).off('value', onUpdateUserUID);
                     console.info('Đã đăng xuất, tạm biệt bae >.<!');
                 }
-                state.singin && userRef.child(state.user.uid).off('value', onUpdateUserUID);
                 //Reset
                 state.input.password = '';
-                state.user.email = '';
+                state.user.uid = "";
+                state.user.email = 'Đang tải...';
                 state.user.level = 'Đang tải...';
                 state.singin = false;
-
+                f7.loginScreen();
             }
-
         });
     },
     LEVELUP(state, payload) {
@@ -106,23 +97,54 @@ var mutations = {
             }
         }
     },
+    INIT_DEVICE(state) {
+        var exit = false;
+        document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("offline", onOffline, false);
+
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+        // Handle the offline event
+        function onOffline() {
+            f7.closeModal();
+            f7.alert('Bạn chưa kết nối Internet! Ứng dụng chuyển sang chế độ ngoại tuyến (OFFLINE) !');
+            document.addEventListener("online", onOnline, false);
+        }
+        // Handle the online event
+        function onOnline() {
+            f7.alert('Bạn đã kết nối Internet!, dữ liệu của bạn sẽ được đồng bộ!');
+        }
+        // Handle the back button
+        function onBackKeyDown() {
+            exit = !exit;
+            if (exit) {
+                f7.confirm('Bạn muốn thoát ứng dụng?',
+                    function() {
+                        navigator.app.clearHistory();
+                        navigator.app.exitApp();
+                    },
+                    function() {
+                        f7.closeModal();
+                    });
+            }
+        }
+    },
     OFFLINE(state) {
         f7.alert('Một số chức năng sẽ không hoạt động khi ở chế độ ngoại tuyến, kết nối mạng để có trải nghiệm tốt nhất!');
     },
     LOGIN(state) {
         var email = state.input.email;
         var password = state.input.password;
-
-        //Check login
-        // firebase.auth().onAuthStateChanged(user => { user ? state.singin = true : state.singin = false; });
         //SingIn
         if (password !== "" && email !== "" && password.length > 5) {
+            f7.closeModal();
             state.islogin = true;
             f7.showPreloader('Đăng nhập ...');
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
                     f7.addNotification({
-                        title: 'Thông báo',
+                        title: '📣 Thông báo',
                         message: `Chào mừng bạn ${email}`,
                         hold: 3000
                     });
@@ -131,7 +153,7 @@ var mutations = {
                 })
                 .catch(function(error) {
                     f7.hidePreloader();
-
+                    f7.loginScreen();
                     setTimeout(() => { state.islogin = !state.islogin; }, 1234);
                     var errorCode = error.code;
                     console.log(error.code);
@@ -148,23 +170,24 @@ var mutations = {
         }
     },
     LOGOUT(state) {
-        f7.showPreloader('Đăng xuất ...');
-        state.islogin = false;
-        state.isRegister = false;
-        firebase.auth().signOut()
-            .then((user) => {
-                f7.addNotification({
-                    title: 'Thông báo',
-                    message: 'Bạn đã đăng xuất!',
-                    hold: 3000
+        f7.confirm('Bạn có muốn đăng xuất?', function() {
+            f7.showPreloader('Đăng xuất ...');
+            state.islogin = false;
+            state.isRegister = false;
+            firebase.auth().signOut()
+                .then((user) => {
+                    f7.addNotification({
+                        title: 'Thông báo',
+                        message: 'Bạn đã đăng xuất!',
+                        hold: 3000
+                    });
+                    f7.hidePreloader();
+                }).catch((error) => {
+                    f7.hidePreloader();
+                    f7.alert('Có lỗi, hãy kiểm tra kết nối mạng của bạn!');
+                    console.error(error.message);
                 });
-                f7.hidePreloader();
-            }).catch(() => {
-                f7.hidePreloader();
-
-                f7.alert('Có lỗi, hãy kiểm tra kết nối mạng của bạn!');
-                console.error(error.message);
-            });
+        });
     },
     REGISTER(state) {
         state.isRegister = true;
@@ -204,7 +227,6 @@ var mutations = {
         }
     },
     RECOVERY_PASS(state) {
-
         var email = state.input.email;
         if (email.length > 5) {
             f7.showPreloader('Đang gửi yêu cầu ...');

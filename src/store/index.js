@@ -23,5 +23,8 @@ export const store = new Vuex.Store({
         img
     }
 });
+
+
+store.commit('INIT_DEVICE');
 //Init 'CHECK' when start app
 store.commit('INIT_APP');

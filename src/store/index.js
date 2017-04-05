@@ -11,7 +11,9 @@ import { actions } from "./actions.js";
 
 
 import { account } from "./modules/account";
-import { img } from "./modules/img.js";
+import { img } from "./modules/img";
+import { test } from "./modules/test";
+
 
 export const store = new Vuex.Store({
     state,
@@ -20,10 +22,12 @@ export const store = new Vuex.Store({
     actions,
     modules: {
         account,
-        img
+        img,
+        test
     }
 });
 
+store.commit('test/TEST');
 
 store.commit('INIT_DEVICE');
 //Init 'CHECK' when start app

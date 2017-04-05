@@ -1,14 +1,12 @@
 <template lang="pug">
-<div class="toolbar">
-        <div class="toolbar-inner">
-            <f7-button data-popover=".tro-giup" class="link open-popover" big fill color="orange">Trợ giúp ❓</f7-button>
-            <f7-button data-popover=".thu-nuoi" class="link open-popover" big fill color="green">Thú cưng 🐣</f7-button>
-            <f7-button data-popover=".tien-ich" class="link open-popover" big fill color="pink">Tiện ích 💡</f7-button>
-        </div>
-        <tools></tools>
-        <help></help>
-        <pet></pet>
-</div>
+.toolbar
+  .toolbar-inner
+    f7-button.link.open-popover(data-popover='.tro-giup', big fill, color='orange') Trợ giúp ❓
+    f7-button.link.open-popover(data-popover='.thu-nuoi', big fill, color='green') Thú cưng 🐣
+    f7-button.link.open-popover(data-popover='.tien-ich', big fill, color='pink') Tiện ích 💡
+  tools
+  help
+  pet
 </template>
 <script>
 import Info from './info/info';

@@ -3,12 +3,9 @@
   f7-view
     f7-pages
       f7-page(login-screen)
-        f7-block-title(style='text-align: center')  🌟 🌟 🌟 🌟 🌟
-        f7-login-screen-title(v-if='!singin') Cùng học tốt 
-        f7-login-screen-title(v-if='singin')
-          | Chào mừng
-          br
-          |  {{user.email}}
+        f7-block-title(style='text-align: center; ')  🌟 🌟 🌟 🌟 🌟
+        br
+        f7-login-screen-title(style="text-shadow: 0 0 4px white, 0 0 5px gray;") CÙNG HỌC TỐT 
         f7-list(form )
           f7-list-item
             f7-label Email :
@@ -18,15 +15,15 @@
             f7-input(v-model='password' name='password' type='password' placeholder='nhập mật khẩu')
           f7-list-item(v-if='Register' class='animated fadeIn')
             f7-label Xác nhận
-            f7-input( v-model='repassword' name='password', type='password' placeholder='Nhập lại mật khẩu')
-        f7-list(class='animated flipInX')
-          f7-list-button
-            f7-button(v-if='!Register' @click='LOGIN' big fill) Đăng nhập
+            f7-input( v-model='repassword' name='password', type='password' placeholder='nhập lại mật khẩu')
+        f7-list
+          f7-list-button()
+            f7-button(v-if='!Register' class='animated flipInX' @click='LOGIN' big fill) Đăng nhập
             f7-button(v-if='Register' @click='REGISTER' big fill color='green' class='animated flipInX') Đăng ký ngay! 
           f7-list
             f7-list-button(v-if='Register', class='animated fadeInUp')
               f7-button(@click='Register=!Register' big fill) Trở lại đăng nhập 
-        f7-list(class='animated fadeInUp')
+        f7-list(v-if='!Register' class='animated fadeInUp')
           f7-grid
             f7-col
               f7-button(v-if='!Register', open-popup='#RECOVERY_PASS', color='pink', big, fill) Quên mật khẩu

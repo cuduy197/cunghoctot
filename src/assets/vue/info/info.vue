@@ -1,7 +1,6 @@
 <template>
-
         <div>
-            <div class="card facebook-card">
+            <div class="card facebook-card" style="border-radius: 10px;padding: 5px;box-shadow: 0 0px 10px rgba(0,0,0,0.2);">
                 <div class="card-header">
                     <div class="facebook-avatar animated tada"><img :src="avatar" width="34" height="34"></div>
                     <div class="facebook-name">{{user.email}}</div>
@@ -29,7 +28,6 @@
                 </div>
             </div>
         </div>
-
 </template>
 <script>
 import {

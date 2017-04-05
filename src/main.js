@@ -3,6 +3,7 @@
 import Vue from 'vue';
 // Import F7
 import Framework7 from 'framework7';
+
 // Import F7 Vue Plugin
 import Framework7Vue from 'framework7-vue';
 //F7 icons
@@ -12,7 +13,7 @@ import Framework7Theme from 'framework7/dist/css/framework7.ios.min.css';
 import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min.css';
 
 
-import AnimatedCss from 'animate.css/animate.css';
+import 'animate.css/animate.css';
 
 /* OR for Material Theme:
  import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
@@ -30,18 +31,16 @@ import VueTouch from 'vue-touch';
 import Firebase from 'firebase';
 
 
+import VueTouchRipple from 'vue-touch-ripple';
 
-//VueFire
-//import VueFire from 'vuefire';
-
-// Vuex store
-import { store } from './store/index';
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue);
 Vue.use(VueTouch);
-//Vue.use(VueFire);
+Vue.use(VueTouchRipple);
 
+// Vuex store
+import { store } from './store/index';
 
 // Init App
 new Vue({

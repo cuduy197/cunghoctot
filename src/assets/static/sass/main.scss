@@ -10,6 +10,26 @@ input {
     border-radius: 15px;
 }
 
+.login-screen-content {
+    background-image: url('../images/hinhnen.jpg');
+    background-size: cover;
+}
+
+.modal-inner {
+    padding: 15px;
+    border-radius: 13px 13px 0 0;
+    position: relative;
+    background: rgba(255, 255, 255, 1);
+}
+
+.modal-button {
+    background: rgba(255, 255, 255, 1);
+}
+
+.modal {
+    box-shadow: 0 0 13px rgba(0, 0, 0, 0.5);
+}
+
 
 /* Backgrounds */
 

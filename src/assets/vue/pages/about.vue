@@ -8,7 +8,7 @@
             <f7-block inner>
                 <f7-link @click="$router.back()">Go back via Router API</f7-link>
             </f7-block>
-            <f7-button big fill back>back</f7-button>
+            <f7-button v-touch-ripple big fill back>back</f7-button>
         </f7-block>
     </f7-page>
 </template>

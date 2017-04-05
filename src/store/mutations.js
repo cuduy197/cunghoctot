@@ -16,7 +16,6 @@ var mutations = {
     //CHECK AND INIT!!! IMPORTANT!
     INIT_APP(state) {
         var loading_text = ['Oh la la ...', "Đợi 1 chút nhé ...", "Sống như những đóa hoa ...", '1,2,3,5 bạn có đánh rơi nhịp nào không?', "Chờ tí nhé ...", 'Hãy yêu ngày tới dù quá mệt kiếp người ...', "Để gió cuốn đi...", "Cười lên nào :)", "Never give up!!!", "Tập thể dục nào ...", "Sử dụng thời gian hiệu quả nhé...", "Nhớ bảo vệ mắt ...", "Cùng thư giãn nào ...", "Hãy cứ ngu ngơ, cứ dại khờ ...", "Vui lên đi buồn làm chi :)"];
-
         f7.showPreloader(loading_text[Math.floor(Math.random() * loading_text.length)]);
         firebase.auth().onAuthStateChanged(user => {
             var onUpdateUserUID;
@@ -62,6 +61,7 @@ var mutations = {
                 });
             } else {
                 f7.hidePreloader();
+                f7.loginScreen();
                 console.info('Bae chưa đăng nhập, đăng nhập để đến với em đi nào bae ^^!');
                 //XÓA CẬP NHẬT DỮ LIỆU CỦA UID CŨ!
                 //Cance listener value change !
@@ -76,7 +76,7 @@ var mutations = {
                 state.user.email = 'Đang tải...';
                 state.user.level = 'Đang tải...';
                 state.singin = false;
-                f7.loginScreen();
+
             }
         });
     },
@@ -98,6 +98,7 @@ var mutations = {
         }
     },
     INIT_DEVICE(state) {
+
         var exit = false;
         document.addEventListener("deviceready", onDeviceReady, false);
         document.addEventListener("offline", onOffline, false);
@@ -138,11 +139,12 @@ var mutations = {
         var password = state.input.password;
         //SingIn
         if (password !== "" && email !== "" && password.length > 5) {
-            f7.closeModal();
+            f7.showPreloader('Kiểm tra thông tin đăng nhập');
             state.islogin = true;
-            f7.showPreloader('Đăng nhập ...');
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
+                    f7.closeModal();
+
                     f7.addNotification({
                         title: '📣 Thông báo',
                         message: `Chào mừng bạn ${email}`,
@@ -171,11 +173,13 @@ var mutations = {
     },
     LOGOUT(state) {
         f7.confirm('Bạn có muốn đăng xuất?', function() {
+
             f7.showPreloader('Đăng xuất ...');
             state.islogin = false;
             state.isRegister = false;
             firebase.auth().signOut()
                 .then((user) => {
+                    f7.loginScreen();
                     f7.addNotification({
                         title: 'Thông báo',
                         message: 'Bạn đã đăng xuất!',
@@ -194,7 +198,6 @@ var mutations = {
         var email = state.input.email;
         var password = state.input.password;
         var repassword = state.input.repassword;
-
         if (password == repassword && password.length > 5) {
             f7.showPreloader('Đăng ký ...');
             firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -210,7 +213,6 @@ var mutations = {
                 })
                 .catch((error) => {
                     f7.hidePreloader();
-
                     state.isRegister = false;
                     var errorCode = error.code;
                     var errorMessage = error.message;
@@ -222,7 +224,7 @@ var mutations = {
                 });
         } else {
             state.isRegister = false;
-            password === "" || email === "" ? f7.alert('Hãy nhập đầy đủ thông tin sau đó nhấn "Đăng ký ngay"!') : password.length < 5 ? f7.alert('Mật khẩu quá ngắn! hẫy nhập trên 5 ký tự') : f7.alert('Sai mật khẩu');
+            password === "" || email === "" ? f7.alert('Hãy nhập đầy đủ thông tin sau đó nhấn "Đăng ký ngay"!') : password.length < 5 ? f7.alert('Mật khẩu quá ngắn! hẫy nhập trên 5 ký tự') : f7.alert('Mật khẩu và xác nhận mật khẩu không giống nhau! Hãy kiểm tra lại!');
 
         }
     },

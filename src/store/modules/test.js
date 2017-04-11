@@ -9,7 +9,11 @@ var test = {
     },
     mutations: {
         TEST(state) {
-            // console.log('mojs');
+
+            /*            setInterval(() => {
+                            console.log('mojs');
+                            MathJax.Hub.Typeset();
+                        }, 1000);*/
         } //end TEST
     }
 };

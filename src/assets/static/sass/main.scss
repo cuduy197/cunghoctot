@@ -1,5 +1,15 @@
 * {
     user-select: none;
+    z-index: 0;
+    /* Fix Mo-jS */
+}
+
+.vue-typer {
+    font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+}
+
+.vue-typer .custom.caret {
+    display: none;
 }
 
 input {

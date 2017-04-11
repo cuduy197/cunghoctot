@@ -13,4 +13,4 @@ const userRef = db.ref('users');
 //const dataRef = db.ref('cauhoi');
 
 
-export { db, userRef, dataRef };
+export { db, userRef };

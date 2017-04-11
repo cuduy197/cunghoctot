@@ -9,7 +9,7 @@ var f7 = new Framework7({
     modalButtonCancel: 'Hủy bỏ',
     modalPreloaderTitle: 'Đang tải'
 });
-var mutations = {
+export const mutations = {
     inputEmail(state, value) { state.input.email = value; },
     inputPassword(state, value) { state.input.password = value; },
     inputRePassword(state, value) { state.input.repassword = value; },
@@ -20,6 +20,7 @@ var mutations = {
         firebase.auth().onAuthStateChanged(user => {
             var onUpdateUserUID;
             if (user) {
+
                 state.singin = true;
                 console.log('Chào mừng: ' + firebase.auth().currentUser.email);
                 console.info('Bae đã đăng nhập ^^!');
@@ -53,13 +54,41 @@ var mutations = {
                     state.user.login = data.login;
 
                     //Close modal
-                    state.user.login && setTimeout(() => { f7.closeModal(); }, 888);
+                    state.user.login && setTimeout(() => {
+                        f7.closeModal();
+
+                        const burst = new mojs.Burst({
+                            radius: {
+                                15: 90
+                            },
+                            count: 15,
+                            scale: 2,
+                            duration: 200,
+                            onComplete() {
+                                //console.log('Done');
+                            },
+                            children: {
+                                strokeWidth: 15,
+                                // property map - maps over children with mod function
+                                shape: ['circle', 'polygon'],
+                                // property map - maps over children with mod function
+                                fill: ['#333', 'magenta', 'purple', 'yellow', 'red', 'cyan', 'orange'],
+                                angle: {
+                                    0: 180
+                                },
+                            }
+                        });
+                        burst.replay();
+
+
+                    }, 888);
 
                 }, (error) => {
                     f7.alert('Đã có lỗi khi tải dữ liệu! Kiểm tra kết nối mạng của bạn!');
                     console.info("Error: " + error.code);
                 });
             } else {
+
                 f7.hidePreloader();
                 f7.loginScreen();
                 console.info('Bae chưa đăng nhập, đăng nhập để đến với em đi nào bae ^^!');
@@ -105,12 +134,39 @@ var mutations = {
 
         function onDeviceReady() {
             document.addEventListener("backbutton", onBackKeyDown, false);
+            document.addEventListener("resume", onResume, false);
+
         }
         // Handle the offline event
         function onOffline() {
             f7.closeModal();
             f7.alert('Bạn chưa kết nối Internet! Ứng dụng chuyển sang chế độ ngoại tuyến (OFFLINE) !');
             document.addEventListener("online", onOnline, false);
+        }
+        // Handle the resume event
+        function onResume() {
+            const burst = new mojs.Burst({
+                radius: {
+                    15: 90
+                },
+                count: 15,
+                scale: 2,
+                duration: 200,
+                onComplete() {
+                    //console.log('Done');
+                },
+                children: {
+                    strokeWidth: 15,
+                    // property map - maps over children with mod function
+                    shape: ['circle', 'polygon'],
+                    // property map - maps over children with mod function
+                    fill: ['#333', 'magenta', 'purple', 'yellow', 'red', 'cyan', 'orange'],
+                    angle: {
+                        0: 180
+                    },
+                }
+            });
+            burst.replay();
         }
         // Handle the online event
         function onOnline() {
@@ -144,7 +200,6 @@ var mutations = {
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
                     f7.closeModal();
-
                     f7.addNotification({
                         title: '📣 Thông báo',
                         message: `Chào mừng bạn ${email}`,
@@ -254,5 +309,3 @@ var mutations = {
         }
     }
 };
-
-export default mutations;

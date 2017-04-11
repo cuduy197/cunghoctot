@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 /*jshint -W030 */
-const state = {
+export const state = {
     user: {
         email: 'Đang tải...',
         uid: '',
@@ -15,5 +15,3 @@ const state = {
     },
     singin: false, //Check if was singin!
 };
-
-export { state };

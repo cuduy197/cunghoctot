@@ -11,8 +11,7 @@ import Framework7Icons from 'framework7-icons/css/framework7-icons.css';
 // Import F7 iOS Theme Styles
 import Framework7Theme from 'framework7/dist/css/framework7.ios.min.css';
 import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min.css';
-
-
+//Animated css
 import 'animate.css/animate.css';
 
 /* OR for Material Theme:
@@ -30,14 +29,15 @@ import VueTouch from 'vue-touch';
 //Firebase
 import Firebase from 'firebase';
 
+import mojs from 'mo-js';
 
-import VueTouchRipple from 'vue-touch-ripple';
+import VueTyperPlugin from 'vue-typer';
 
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue);
 Vue.use(VueTouch);
-Vue.use(VueTouchRipple);
+Vue.use(VueTyperPlugin);
 
 // Vuex store
 import { store } from './store/index';

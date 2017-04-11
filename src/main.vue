@@ -14,6 +14,7 @@
   pop-up
   wellcome
   login
+  test
 </template>
 <script>
 import Quote from 'assets/vue/quote/quote';
@@ -46,7 +47,6 @@ export default {
             info,
             wellcome
         },
-        created() {
-        }
+        created() {}
 }
 </script>

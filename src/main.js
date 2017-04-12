@@ -9,7 +9,7 @@ import Framework7Vue from 'framework7-vue';
 //F7 icons
 import Framework7Icons from 'framework7-icons/css/framework7-icons.css';
 // Import F7 iOS Theme Styles
-import Framework7Theme from 'framework7/dist/css/framework7.ios.min.css';
+import Framework7Theme from 'framework7/dist/css/framework7.ios.css';
 import Framework7ThemeColors from 'framework7/dist/css/framework7.ios.colors.min.css';
 //Animated css
 import 'animate.css/animate.css';

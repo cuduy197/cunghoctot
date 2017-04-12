@@ -56,7 +56,6 @@ export const mutations = {
                     //Close modal
                     state.user.login && setTimeout(() => {
                         f7.closeModal();
-
                         const burst = new mojs.Burst({
                             radius: {
                                 15: 90
@@ -78,11 +77,9 @@ export const mutations = {
                                 },
                             }
                         });
+                        burst.el.style.zIndex = 99999;
                         burst.replay();
-
-
                     }, 888);
-
                 }, (error) => {
                     f7.alert('Đã có lỗi khi tải dữ liệu! Kiểm tra kết nối mạng của bạn!');
                     console.info("Error: " + error.code);
@@ -139,7 +136,7 @@ export const mutations = {
         }
         // Handle the offline event
         function onOffline() {
-            f7.closeModal();
+            // f7.closeModal();
             f7.alert('Bạn chưa kết nối Internet! Ứng dụng chuyển sang chế độ ngoại tuyến (OFFLINE) !');
             document.addEventListener("online", onOnline, false);
         }
@@ -149,6 +146,7 @@ export const mutations = {
                 radius: {
                     15: 90
                 },
+                className: 'brust',
                 count: 15,
                 scale: 2,
                 duration: 200,
@@ -166,6 +164,7 @@ export const mutations = {
                     },
                 }
             });
+            burst.el.style.zIndex = 99999;
             burst.replay();
         }
         // Handle the online event
@@ -182,7 +181,7 @@ export const mutations = {
                         navigator.app.exitApp();
                     },
                     function() {
-                        f7.closeModal();
+                        //f7.closeModal();
                     });
             }
         }
@@ -199,7 +198,6 @@ export const mutations = {
             state.islogin = true;
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
-                    f7.closeModal();
                     f7.addNotification({
                         title: '📣 Thông báo',
                         message: `Chào mừng bạn ${email}`,

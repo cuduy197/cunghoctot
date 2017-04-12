@@ -1,10 +1,10 @@
 /*jshint esversion: 6 */
 /*jshint -W030 */
 /*var f7 = new Framework7();*/
-export const img = {
+export const mp3 = {
     namespaced: true,
     state: {
-        avatar: require('../../assets/static/images/avatar.png')
+        music: require('../../assets/static/mp3/music.mp3')
     },
     mutations: {}
 };

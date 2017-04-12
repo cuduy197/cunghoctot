@@ -13,6 +13,8 @@ import { actions } from "./actions.js";
 import { account } from "./modules/account";
 import { img } from "./modules/img";
 import { test } from "./modules/test";
+import { mp3 } from "./modules/mp3";
+
 
 
 export const store = new Vuex.Store({
@@ -23,7 +25,8 @@ export const store = new Vuex.Store({
     modules: {
         account,
         img,
-        test
+        test,
+        mp3
     }
 });
 

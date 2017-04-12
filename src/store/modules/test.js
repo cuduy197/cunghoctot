@@ -2,7 +2,7 @@
 /*jshint -W030 */
 var f7 = new Framework7();
 //Store default
-var test = {
+export const test = {
     namespaced: true,
     state: {
         test: 'ok!!!!!!'
@@ -17,4 +17,3 @@ var test = {
         } //end TEST
     }
 };
-export { test };

@@ -49,6 +49,7 @@
                  },
                  { test: /\.(png|jpe?g|gif)$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
                  { test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } },
+                 { test: /\.mp3$/, loader: 'file-loader', options: { name: '[name].[ext]' } },
                  { test: /\.svg$/, loader: 'url-loader' },
                  { test: /\.s[ca]ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] }, {
                      test: /\.vue$/,
@@ -86,18 +87,18 @@
                  }
              })
          ]
-     }
+     };
 
      if (typeof env == "undefined" || typeof env.devserver == "undefined") {
-         returner.plugins.push(new CordovaHtmlOutputPlugin())
-         returner.plugins.push(new ExtractTextPlugin("styles.css"))
+         returner.plugins.push(new CordovaHtmlOutputPlugin());
+         returner.plugins.push(new ExtractTextPlugin("styles.css"));
          returner.module.rules.push({
              test: /\.css$/,
              use: ExtractTextPlugin.extract({
                  fallback: "style-loader",
                  use: "css-loader"
              })
-         })
+         });
      }
 
      if (env) {
@@ -105,13 +106,13 @@
              returner.module.rules.push({
                  test: /\.css$/,
                  loader: ['style-loader', 'css-loader']
-             })
+             });
              returner.entry = [
                  entryFile,
                  path.resolve(__dirname, "webpack/dev_helpers/CordovaDeviceRouter.js")
-             ]
-             returner.output.publicPath = "/"
-             returner.devtool = "eval"
+             ];
+             returner.output.publicPath = "/";
+             returner.devtool = "eval";
              returner.devServer = {
                  contentBase: path.join(__dirname, "www"),
                  port: devServerPort,
@@ -124,20 +125,20 @@
                      "Access-Control-Allow-Origin": "*"
                  },
                  host: "0.0.0.0"
-             }
-             returner.plugins.push(new webpack.NamedModulesPlugin())
+             };
+             returner.plugins.push(new webpack.NamedModulesPlugin());
          } else if (typeof env.release != 'undefined' && env.release) {
              returner.plugins.push(new CleanPlugin("www", {
                  root: path.join(__dirname, "."),
                  dry: false,
                  verbose: false,
                  exclude: ["index.html"]
-             }))
-             returner.plugins.push(new UglifyJsPlugin())
+             }));
+             returner.plugins.push(new UglifyJsPlugin());
          }
      }
 
-     return returner
- }
+     return returner;
+ };
 
- module.exports = config
+ module.exports = config;

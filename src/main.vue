@@ -17,6 +17,7 @@
   test
 </template>
 <script>
+/*jshint esversion: 6 */
 import Quote from 'assets/vue/quote/quote';
 import bottomBar from 'assets/vue/bottomBar';
 import leftPanel from 'assets/vue/leftPanel';
@@ -30,9 +31,8 @@ import info from 'assets/vue/info/info';
 import wellcome from 'assets/vue/wellcomePopup';
 
 export default {
-
     data() {
-            return {}
+            return {};
         },
         components: {
             Quote,
@@ -48,5 +48,5 @@ export default {
             wellcome
         },
         created() {}
-}
+};
 </script>

@@ -1,7 +1,7 @@
 /* beautify ignore:start */
 <template lang="pug">
 div()
-  
+
   f7-list.inset
     f7-list-item( link='#', title='🔢 Toán học')
     f7-list-item( link='#', title='📑 Ngữ văn')

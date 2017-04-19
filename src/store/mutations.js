@@ -9,7 +9,7 @@ var f7 = new Framework7({
     modalButtonCancel: 'Hủy bỏ',
     modalPreloaderTitle: 'Đang tải'
 });
-export const mutations = {
+export const  mutations = {
     inputEmail(state, value) { state.input.email = value; },
     inputPassword(state, value) { state.input.password = value; },
     inputRePassword(state, value) { state.input.repassword = value; },
@@ -24,7 +24,7 @@ export const mutations = {
                 state.singin = true;
                 console.log('Chào mừng: ' + firebase.auth().currentUser.email);
                 console.info('Bae đã đăng nhập ^^!');
-                //UID and Eamil, login 
+                //UID and Eamil, login
                 state.user.uid = user.uid;
                 state.user.email = user.email;
                 console.log("State uid của bae là : " + state.user.uid);
@@ -44,7 +44,7 @@ export const mutations = {
                 });
 
                 //CẬP NHẬT LIÊN TỤC KHI GIÁ TRỊ THAY ĐỔI
-                //Set snapshot data -->  store state! 
+                //Set snapshot data -->  store state!
                 onUpdateUserUID = UserUID.on("value", snapshot => {
                     //console.log('on Update!');
                     console.log(snapshot.val());

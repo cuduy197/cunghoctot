@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 // Import Vue
 import Vue from 'vue';
 // Import F7

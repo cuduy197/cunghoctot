@@ -9,7 +9,7 @@ var f7 = new Framework7({
     modalButtonCancel: 'Hủy bỏ',
     modalPreloaderTitle: 'Đang tải'
 });
-export const  mutations = {
+export const mutations = {
     inputEmail(state, value) { state.input.email = value; },
     inputPassword(state, value) { state.input.password = value; },
     inputRePassword(state, value) { state.input.repassword = value; },
@@ -188,6 +188,24 @@ export const  mutations = {
     },
     OFFLINE(state) {
         f7.alert('Một số chức năng sẽ không hoạt động khi ở chế độ ngoại tuyến, kết nối mạng để có trải nghiệm tốt nhất!');
+    },
+    GOOGLE_LOGIN(state) {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(function() {
+            firebase.auth().getRedirectResult().then(function(result) {
+                // This gives you a Google Access Token.
+                // You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                console.log(user + 'Login');
+                // ...
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        });
     },
     LOGIN(state) {
         var email = state.input.email;

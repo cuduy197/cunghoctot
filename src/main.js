@@ -23,8 +23,7 @@ import AppStyles from './assets/static/sass/main.scss';
 import Routes from './routes.js';
 // Import App Component
 import App from './main.vue';
-// VueTouch
-import VueTouch from 'vue-touch';
+// VueTouch import VueTouch from 'vue-touch';
 //Firebase
 import Firebase from 'firebase';
 
@@ -35,7 +34,7 @@ import VueTyperPlugin from 'vue-typer';
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue);
-Vue.use(VueTouch);
+//Vue.use(VueTouch);
 Vue.use(VueTyperPlugin);
 
 // Vuex store

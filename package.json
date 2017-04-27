@@ -2,11 +2,20 @@
     "name": "cunghoctot",
     "version": "1.0.1",
     "description": "Ứng dụng ôn thi THPT quốc gia hiệu quả, thú vị và miễn phí",
+
     "scripts": {
+        "savepass": "git config --global credential.helper 'cache --timeout=36000'",
+        "git": "git status",
+        "add": "git add .",
+        "pull": "git reset --hard HEAD && git pull",
+        "commit": "git add . && git commit -m",
+        "push": "git push origin master",
+        "start": "cordova run browser -- --lr",
         "bae": "i love u! bae ^^",
         "dev": "cordova run browser -- --lr",
         "apk": "cordova build android"
     },
+
     "keywords": [
         "ecosystem:cordova"
     ],

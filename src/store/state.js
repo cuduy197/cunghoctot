@@ -1,17 +1,12 @@
-/*jshint esversion: 6 */
-/*jshint -W030 */
 export const state = {
     user: {
         email: 'Đang tải...',
+        photoURL: require('../assets/static/images/avatar.png'),
         uid: '',
         level: 'Đang tải...',
         login: '',
         xu: 'Đang tải...'
     },
-    input: {
-        email: '',
-        password: '',
-        repassword: ''
-    },
     singin: false, //Check if was singin!
+    offline: false //check internet status 
 };

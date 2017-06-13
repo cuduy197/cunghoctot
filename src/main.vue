@@ -1,23 +1,22 @@
 <template lang="pug">
 #app
-  f7-statusbar
-  left-panel
-  right-panel
-  f7-views
-    f7-view#main-view(navbar-through='', :dynamic-navbar='true', main='')
-      nav-bar
-      f7-pages
-        f7-page
-          info
-          navigation
-      bottom-bar
-  pop-up
-  wellcome
-  login
-  test
+	f7-statusbar
+	left-panel
+	right-panel
+	f7-views
+		f7-view#main-view(navbar-through='', :dynamic-navbar='true', main='')
+			nav-bar
+			f7-pages
+				f7-page
+					info
+					navigation
+			bottom-bar
+	pop-up
+	wellcome
+	login
+	test
 </template>
 <script>
-/*jshint esversion: 6 */
 import Quote from 'assets/vue/quote/quote';
 import bottomBar from 'assets/vue/bottomBar';
 import leftPanel from 'assets/vue/leftPanel';
@@ -31,22 +30,22 @@ import info from 'assets/vue/info/info';
 import wellcome from 'assets/vue/wellcomePopup';
 
 export default {
-    data() {
-            return {};
-        },
-        components: {
-            Quote,
-            bottomBar,
-            leftPanel,
-            rightPanel,
-            navBar,
-            test,
-            login,
-            popUp,
-            navigation,
-            info,
-            wellcome
-        },
-        created() {}
+  data() {
+    return {};
+  },
+  components: {
+    Quote,
+    bottomBar,
+    leftPanel,
+    rightPanel,
+    navBar,
+    test,
+    login,
+    popUp,
+    navigation,
+    info,
+    wellcome
+  },
+  created() {}
 };
 </script>

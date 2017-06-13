@@ -32,89 +32,88 @@ var myApp = new Framework7();
 
 export default {
     data() {
-            return {
-                progressbar: 0,
-                css: '',
-                math: '<i>Bạn có biết: </i> `a^0`',
-                isPlayMusic: false,
-                myMedia: null,
-                position: 0,
-                duration: 0,
-                checkMusic: null
-            }
+        return {
+            progressbar: 0,
+            css: '',
+            math: '',
+            isPlayMusic: false,
+            myMedia: null,
+            position: 0,
+            duration: 0,
+            checkMusic: null
+        }
+    },
+    mounted() { },
+    methods: {
+        change() {
+            this.$nextTick(function () {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            });
         },
-        mounted() {},
-        methods: {
-            change() {
-                this.math = '<i>Kết quả: </i>`a^' + Math.floor((Math.random() * 10) + 1) + '`';
-                this.$nextTick(function() {
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                });
-            },
-            playMusic() {
-                if (this.myMedia === null) {
+        playMusic() {
+            if (this.myMedia === null) {
 
-                    var isMobile = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-                    if (isMobile) {
-                        // PhoneGap application
-                        this.myMedia = new Media("/android_asset/www/music.mp3");
-                    } else {
-                        this.myMedia = new Media("music.mp3");
-                    }
-                    // Update media position every second
-                    var my_media = this.myMedia;
-                    this.checkMusic = setInterval(() => {
-                        my_media.getCurrentPosition(
-                            //success
-                            (position) => {
-                                this.position = position;
-                            });
-                    }, 1000);
-
-                }
-                this.isPlayMusic = !this.isPlayMusic;
-                if (this.isPlayMusic) {
-                    this.myMedia.play();
-                    this.css = "animated infinite tada"
-
+                var isMobile = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+                if (isMobile) {
+                    this.myMedia = new Media("/android_asset/www/music.mp3");
                 } else {
-                    setTimeout(() => {
-                        this.myMedia.pause();
-                        this.css = "";
-                    }, 200)
+                    this.myMedia = new Media("music.mp3");
                 }
-            },
-            stopMusic() {
+                // Update media position every second
+                var my_media = this.myMedia;
+                this.checkMusic = setInterval(() => {
+                    my_media.getCurrentPosition(
+                        //success
+                        (position) => {
+                            this.position = position;
+                        });
+                }, 1000);
 
             }
+            this.isPlayMusic = !this.isPlayMusic;
+            if (this.isPlayMusic) {
+                this.myMedia.play();
+                this.css = "animated infinite tada"
 
-        },
-        watch: {
-            math() {
-                console.log("math change ...");
-            },
-            position() {
-                var mymedia = this.myMedia;
-                this.progressbar = (this.position / this.duration) * 100;
-                if (this.myMedia !== null) {
-                    var durtion = mymedia.getDuration();
-                    this.duration = durtion;
-                }
-                //alert(durtion + ' ss');
-                if (this.position < 0 || this.position == durtion) {
-                    this.position = 0;
-                    clearInterval(this.checkMusic);
-                    console.info('equal');
-                    this.checkMusic = undefined;
+            } else {
+                setTimeout(() => {
+                    this.myMedia.pause();
                     this.css = "";
-                    this.progressbar = "";
-                    this.myMedia = null;
-                    this.isPlayMusic = false;
-                }
+                }, 200)
             }
         },
-        components: {}
+        stopMusic() {
+
+        }
+
+    },
+    watch: {
+        math() {
+            console.log("math change ...");
+        },
+        position() {
+            var mymedia = this.myMedia;
+            this.progressbar = (this.position / this.duration) * 100;
+            if (this.myMedia !== null) {
+                var durtion = mymedia.getDuration();
+                this.duration = durtion;
+            }
+            //alert(durtion + ' ss');
+            if (this.position < 0 || this.position == durtion) {
+                this.position = 0;
+                clearInterval(this.checkMusic);
+                console.info('equal');
+                this.checkMusic = undefined;
+                this.css = "";
+                this.progressbar = "";
+                this.myMedia = null;
+                this.isPlayMusic = false;
+            }
+        }
+    },
+    components: {}
 }
 </script>
 <style>
+
 </style>

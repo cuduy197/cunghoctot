@@ -1,16 +1,3 @@
-import firebase from 'firebase';
-
-const db = firebase.initializeApp({
-    apiKey: "AIzaSyDYmyfh75QPwG8ddlg9OuabPK1Ue-vIDEQ",
-    authDomain: "hoctot2017.firebaseapp.com",
-    databaseURL: "https://hoctot2017.firebaseio.com",
-}).database();
-
-
-
-const userRef = db.ref('users');
-//const dataRef = db.ref('cauhoi');
-
 const burst = new mojs.Burst({
     radius: {
         15: 90
@@ -34,4 +21,4 @@ const burst = new mojs.Burst({
     }
 });
 burst.el.style.zIndex = 99999;
-export { db, userRef, burst };
+export { burst };

@@ -12,7 +12,7 @@
         br
         f7-list
           f7-list-button
-            f7-button(@click='GOOGLE_LOGIN' v-if='!offline' class='animated flipInX'  big fill color="green") Đăng nhập
+            f7-button(@click='FB_LOGIN' v-if='!offline' class='animated flipInX'  big fill color="blue") Đăng nhập Facebook
             f7-button( v-if='offline' class='animated flipInX'  big fill color="red") Kết nối internet để đăng nhập! 
 
 </template>
@@ -25,40 +25,40 @@ import {
 
 export default {
     data() {
-            return {
-                Register: false,
-            }
-        },
-        computed: {
-            ...mapState(['user', 'singin', 'isRegister', 'offline']),
-            email: {
-                get() {
-                    return this.$store.state.input.email
-                },
-                set(value) {
-                    this.$store.commit('inputEmail', value)
-                }
-            },
-            password: {
-                get() {
-                    return this.$store.state.input.password
-                },
-                set(value) {
-                    this.$store.commit('inputPassword', value)
-                }
-            },
-            repassword: {
-                get() {
-                    return this.$store.state.input.repassword
-                },
-                set(value) {
-                    this.$store.commit('inputRePassword', value)
-                }
-            }
-        },
-        methods: {
-            ...mapMutations(['LOGIN', 'LOGOUT', 'REGISTER', 'GOOGLE_LOGIN'])
+        return {
+            Register: false,
         }
+    },
+    computed: {
+        ...mapState(['user', 'singin', 'isRegister', 'offline']),
+        email: {
+            get() {
+                return this.$store.state.input.email
+            },
+            set(value) {
+                this.$store.commit('inputEmail', value)
+            }
+        },
+        password: {
+            get() {
+                return this.$store.state.input.password
+            },
+            set(value) {
+                this.$store.commit('inputPassword', value)
+            }
+        },
+        repassword: {
+            get() {
+                return this.$store.state.input.repassword
+            },
+            set(value) {
+                this.$store.commit('inputRePassword', value)
+            }
+        }
+    },
+    methods: {
+        ...mapMutations(['LOGIN', 'LOGOUT', 'REGISTER', 'GOOGLE_LOGIN', 'FB_LOGIN'])
+    }
 }
 </script>
 <style scoped></style>

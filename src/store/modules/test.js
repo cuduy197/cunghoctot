@@ -1,5 +1,6 @@
-/*jshint esversion: 6 */
-/*jshint -W030 */
+import Parse from "parse";
+Parse.initialize("myAppId"); Parse.serverURL = 'http://hosata.com/parse';
+
 var f7 = new Framework7();
 //Store default
 export const test = {
@@ -10,10 +11,7 @@ export const test = {
     mutations: {
         TEST(state) {
 
-            /*            setInterval(() => {
-                            console.log('mojs');
-                            MathJax.Hub.Typeset();
-                        }, 1000);*/
+
         } //end TEST
     }
 };

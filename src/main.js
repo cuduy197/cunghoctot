@@ -36,7 +36,8 @@ import VueTyperPlugin from 'vue-typer';
 Vue.use(Framework7Vue);
 //Vue.use(VueTouch);
 Vue.use(VueTyperPlugin);
-
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
 // Vuex store
 import { store } from './store/index';
 

@@ -1,10 +1,16 @@
 import Parse from "parse";
-Parse.initialize("myAppId"); Parse.serverURL = 'http://hosata.com/parse';
+Parse.initialize("myAppId");
+Parse.serverURL = 'http://hosata.com/parse';
 const firebase = require('firebase/app');
 require('firebase/auth');
-firebase.initializeApp({ apiKey: "AIzaSyDYmyfh75QPwG8ddlg9OuabPK1Ue-vIDEQ", authDomain: "hoctot2017.firebaseapp.com", })
+firebase.initializeApp({
+    apiKey: "AIzaSyDYmyfh75QPwG8ddlg9OuabPK1Ue-vIDEQ",
+    authDomain: "hoctot2017.firebaseapp.com",
+})
 
-import { burst } from "./mojs.js";
+import {
+    burst
+} from "./mojs.js";
 
 var f7 = new Framework7({
     modalTitle: 'Thông báo',
@@ -42,13 +48,13 @@ export const mutations = {
                 if (window.localStorage.ParseLogin == "false") {
                     console.log("Login... ");
                     Parse.User.logIn(state.user.uid, state.user.uid, {
-                        success: function (user) {
+                        success: function(user) {
                             console.log(Parse.User.current());
                             console.log("LOGIN PARSE OK!");
                             window.localStorage.ParseLogin = "ok";
                             state.user.id = Parse.User.current().id;
                         },
-                        error: function (user, error) {
+                        error: function(user, error) {
                             console.log(error);
                             let userParse = new Parse.User();
                             userParse.set("username", state.user.uid);
@@ -56,16 +62,17 @@ export const mutations = {
                             userParse.set("email", state.user.email);
                             userParse.set("uid", state.user.uid);
                             userParse.signUp(null, {
-                                success: function (user) {
+                                success: function(user) {
                                     window.localStorage.ParseLogin = "ok";
                                     state.user.id = Parse.User.current().id;
-                                }, error: (user, error) => {
+                                },
+                                error: (user, error) => {
                                     console.error("Error: " + error.code + " " + error.message);
                                 }
                             });
                         }
                     });
-                }//End parse login
+                } //End parse login
             } else {
 
                 window.localStorage.ParseLogin = "false";
@@ -84,6 +91,7 @@ export const mutations = {
         firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     },
     FB_LOGIN(state) {
+        //FB
         f7.showPreloader();
         firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider());
 
